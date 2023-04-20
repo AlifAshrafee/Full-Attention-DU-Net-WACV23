@@ -37,8 +37,8 @@ def parse_data(x, y):
         return x, y
 
     x, y = tf.numpy_function(_parse, [x, y], [tf.float32, tf.float32])
-    x.set_shape([192, 256, 3])
-    y.set_shape([192, 256, 2])
+    x.set_shape([288,384, 3])
+    y.set_shape([288,384, 2])
     return x, y
 
 def tf_dataset(x, y, batch=8):
@@ -84,6 +84,7 @@ if __name__ == "__main__":
     
     train_dataset = tf_dataset(train_x, train_y, batch=batch_size)
     valid_dataset = tf_dataset(valid_x, valid_y, batch=batch_size)
+
     # model = load_model_weight(sys.argv[1])
     model.compile(loss=dice_loss, optimizer=Adam(lr), metrics=metrics)
 
